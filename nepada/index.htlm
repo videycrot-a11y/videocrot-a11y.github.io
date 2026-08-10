@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>saepudin</title>
+    <title>newssaepudin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 📈 RUNNING TEXT SPEK BANDAR EMAS TRANSPARAN 📈 */
@@ -177,6 +177,19 @@
 </head>
 <body id="mainBody" style="background-color: #001f3f; color: #ffffff; font-family: sans-serif; text-align: center; padding: 70px 15px 30px 15px; margin: 0;">
 
+     <div class="marquee-container">
+         <marquee scrolamount="5" behavior="scroll" direction="left">
+            koleksi viral terbaru Saepudin bugil news news news news news news
+         </marquee> 
+     </div>
+    <div class="main-container">
+
+        <h1 style="color: #CCA817; font-size: 22px; margin-bottom: 5px; font-weight: 900; margin-top: 10px;">nepada</h1>
+        <p style="color: #ffffff; font-size: 14px; margin-top: 0; font-weight: bold;">"enjoy watch"</p>
+
+        <hr style="border: 1px solid #d1d5db; width: 60%; margin: 15px auto;">
+    </div>
+    
         <div class="video-grid">
 
             <div class="video-card">
