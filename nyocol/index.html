@@ -63,7 +63,6 @@
 
     .phone video { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Overlay transparan pemicu Popunder & Smartlink saat klik video */
     .video-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -90,7 +89,6 @@
 <body>
   <header class="appbar">
     <div class="bar-inner">
-      <!-- Direct Link pada Klik Header / Nama / Logo -->
       <a class="brand" href="https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba" target="_blank" rel="noopener noreferrer">
         <span class="logo">V</span>
         <span>RUDALSAEPUDIN</span>
@@ -102,12 +100,10 @@
   <main class="wrap">
     <section class="player-shell">
       <div class="phone">
-        <!-- Overlay perangkap klik pada area video -->
         <div id="videoOverlay" class="video-overlay"></div>
-        <video id="myVideo" controls playsinline preload="metadata" src="VID-20260717-WA0040.mp4"></video>
+        <video id="myVideo" controls playsinline autoplay muted preload="metadata" src="VID-20260717-WA0040.mp4"></video>
       </div>
 
-      <!-- Smartlink Tombol BERIKUTNYA -->
       <a class="direct-link" href="https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba" target="_blank" rel="noopener noreferrer">
         BERIKUTNYA
       </a>
@@ -117,22 +113,23 @@
   <!-- POPUNDER SCRIPT -->
   <script src="https://crummyneedle.com/d1/01/ca/d101ca05eb20975a6b8c6a27b1417b5f.js"></script>
 
-  <!-- LOGIKA INTERAKSI IKLAN OTOMATIS -->
+  <!-- SCRIPT IKLAN OTOMATIS (5 DETIK) -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var overlay = document.getElementById("videoOverlay");
       var video = document.getElementById("myVideo");
       var smartlinkUrl = "https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba";
 
-      // Pemicu Klik Layar / Video Pertama Kali
-      overlay.addEventListener("click", function () {
-        // Buka Smartlink di Tab Baru saat Layar Video Diklik
+      // 1. IKLAN OTOMATIS SETELAH 5 DETIK TANPA KLIK
+      setTimeout(function() {
         window.open(smartlinkUrl, '_blank');
-        
-        // Sembunyikan overlay agar player/kontrol video aktif
+      }, 5000); // 5000ms = 5 detik
+
+      // 2. KLIK MANUAL VIDEO (Tetap Aktif)
+      overlay.addEventListener("click", function () {
+        window.open(smartlinkUrl, '_blank');
         overlay.style.display = "none";
-        
-        // Putar Video
+        video.muted = false;
         video.play();
       });
     });
