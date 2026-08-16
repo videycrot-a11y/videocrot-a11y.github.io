@@ -204,12 +204,12 @@
           } else {
             unlockContent();
           }
-        }, 5000);
+        }, 10000);
       }
 
       // Deteksi detik ke-5 pemutaran video
       video.addEventListener("timeupdate", function () {
-        if (video.currentTime >= 5 && !hasTriggeredGate) {
+        if (video.currentTime >= 15 && !hasTriggeredGate) {
           triggerAgeGate();
         }
       });
