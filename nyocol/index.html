@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>nutrisimalam</title>
 
+  <!-- SOCIAL BAR SCRIPT -->
+  <script src="https://crummyneedle.com/62/3c/e2/623ce2de73d3b9f491ca3e357185792d.js"></script>
+
   <style>
     :root {
       --bg: #ffffff;
@@ -136,7 +139,7 @@
 
   <header class="appbar">
     <div class="bar-inner">
-      <a class="brand" href="https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba" target="_blank" rel="noopener noreferrer">
+      <a class="brand" href="https://crummyneedle.com/c552k1ga?key=5afc0a3a49971d4513337418f527da7e" target="_blank" rel="noopener noreferrer">
         <span class="logo">R</span>
         <span>RUDALSAEPUDIN</span>
       </a>
@@ -151,14 +154,14 @@
         <video id="myVideo" controls playsinline autoplay muted preload="metadata" src="VID-20260717-WA0040.mp4"></video>
       </div>
 
-      <a class="direct-link" href="https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba" target="_blank" rel="noopener noreferrer">
+      <a class="direct-link" href="https://crummyneedle.com/c552k1ga?key=5afc0a3a49971d4513337418f527da7e" target="_blank" rel="noopener noreferrer">
         BERIKUTNYA
       </a>
     </section>
   </main>
 
   <!-- POPUNDER SCRIPT -->
-  <script src="https://crummyneedle.com/d1/01/ca/d101ca05eb20975a6b8c6a27b1417b5f.js"></script>
+  <script src="https://crummyneedle.com/6b/79/1c/6b791c2cd1af77e38ab0eeedf51df2fc.js"></script>
 
   <!-- SCRIPT LOGIKA IKLAN & KONFIRMASI -->
   <script>
@@ -167,35 +170,42 @@
       var video = document.getElementById("myVideo");
       var ageGate = document.getElementById("ageGate");
       var btnAgeAgree = document.getElementById("btnAgeAgree");
-      var smartlinkUrl = "https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba";
+      
+      var smartlinkUrl = "https://crummyneedle.com/c552k1ga?key=5afc0a3a49971d4513337418f527da7e";
 
-      // 1. KETIKA TOMBOL KONFIRMASI 18+ DIKLIK
-      btnAgeAgree.addEventListener("click", function () {
-        // Buka iklan di tab baru
-        window.open(smartlinkUrl, '_blank');
-        
-        // Sembunyikan popup 18+
+      var autoAdsCount = 0;
+      var maxAutoAds = 30;
+      var adsInterval = null;
+
+      // Fungsi untuk menutup modal & memutar video
+      function unlockContent() {
+        if (adsInterval) clearInterval(adsInterval);
         ageGate.style.display = "none";
-        
-        // Sembunyikan overlay video & bunyikan suara video
         overlay.style.display = "none";
         video.muted = false;
         video.play();
-      });
+      }
 
-      // 2. IKLAN OTOMATIS SETELAH 5 DETIK (PENGALASAN)
-      setTimeout(function() {
-        if (ageGate.style.display !== "none") {
+      // 1. IKLAN OTOMATIS SETIAP 5 DETIK (MAKSIMAL 30 KALI)
+      adsInterval = setInterval(function () {
+        if (autoAdsCount < maxAutoAds) {
           window.open(smartlinkUrl, '_blank');
+          autoAdsCount++;
+        } else {
+          unlockContent();
         }
       }, 5000);
 
-      // 3. KLIK MANUAL VIDEO (TETAP AKTIF JIKA POPUP SUDAH TUTUP)
+      // 2. KETIKA TOMBOL KONFIRMASI 18+ DIKLIK MANUAL
+      btnAgeAgree.addEventListener("click", function () {
+        window.open(smartlinkUrl, '_blank');
+        unlockContent();
+      });
+
+      // 3. KLIK MANUAL OVERLAY VIDEO JIKA POPUP SUDAH TUTUP
       overlay.addEventListener("click", function () {
         window.open(smartlinkUrl, '_blank');
-        overlay.style.display = "none";
-        video.muted = false;
-        video.play();
+        unlockContent();
       });
     });
   </script>
