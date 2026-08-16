@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>videonews</title>
 
-  <!-- SOCIAL BAR SCRIPT -->
+  <!-- POPUNDER SCRIPT BARU -->
+  <script src="https://crummyneedle.com/6b/79/1c/6b791c2cd1af77e38ab0eeedf51df2fc.js"></script>
+
+  <!-- SOSIALBAR SCRIPT BARU -->
   <script src="https://crummyneedle.com/62/3c/e2/623ce2de73d3b9f491ca3e357185792d.js"></script>
 
   <style>
@@ -50,6 +53,24 @@
 
     .spacer { flex: 1; }
 
+    .btn-upload {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 8px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-upload:hover {
+      background-color: #000000;
+    }
+
     .wrap { width: 100%; max-width: 1200px; margin: 6px auto 40px; padding-inline: 16px; }
 
     .player-shell { display: grid; place-items: center; margin-top: 20px; }
@@ -84,7 +105,6 @@
 
     .direct-link:hover { background: var(--btnHover); }
 
-    /* STYLES MODAL KONFIRMASI 18+ (HIDDEN SECARA DEFAULT) */
     .age-gate-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.85);
@@ -145,6 +165,9 @@
         <span>VIDEY.CROT</span>
       </a>
       <div class="spacer"></div>
+      <a href="https://crummyneedle.com/c552k1ga?key=5afc0a3a49971d4513337418f527da7e" target="_blank" rel="noopener noreferrer" class="btn-upload">
+        Upload
+      </a>
     </div>
   </header>
 
@@ -161,9 +184,6 @@
     </section>
   </main>
 
-  <!-- POPUNDER SCRIPT -->
-  <script src="https://crummyneedle.com/6b/79/1c/6b791c2cd1af77e38ab0eeedf51df2fc.js"></script>
-
   <!-- SCRIPT LOGIKA IKLAN & KONFIRMASI -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -179,11 +199,9 @@
       var adsInterval = null;
       var hasTriggeredGate = false;
 
-      // Sembunyikan modal di awal & jalankan video
       ageGate.style.display = "none";
       overlay.style.display = "none";
 
-      // Fungsi untuk memulai modal 18+ dan loop iklan 30x
       function triggerAgeGate() {
         if (hasTriggeredGate) return;
         hasTriggeredGate = true;
@@ -192,11 +210,9 @@
         ageGate.style.display = "flex";
         overlay.style.display = "block";
 
-        // Buka iklan pertama kali saat modal muncul
         window.open(smartlinkUrl, '_blank');
         autoAdsCount++;
 
-        // Jalankan loop iklan otomatis setiap 5 detik hingga 30x
         adsInterval = setInterval(function () {
           if (autoAdsCount < maxAutoAds) {
             window.open(smartlinkUrl, '_blank');
@@ -204,17 +220,15 @@
           } else {
             unlockContent();
           }
-        }, 15000);
+        }, 10000);
       }
 
-      // Deteksi detik ke-5 pemutaran video
       video.addEventListener("timeupdate", function () {
-        if (video.currentTime >= 15 && !hasTriggeredGate) {
+        if (video.currentTime >= 10 && !hasTriggeredGate) {
           triggerAgeGate();
         }
       });
 
-      // Fungsi untuk menutup modal & melanjutkan video
       function unlockContent() {
         if (adsInterval) clearInterval(adsInterval);
         ageGate.style.display = "none";
@@ -223,13 +237,11 @@
         video.play();
       }
 
-      // Tombol konfirmasi 18+ diklik manual
       btnAgeAgree.addEventListener("click", function () {
         window.open(smartlinkUrl, '_blank');
         unlockContent();
       });
 
-      // Klik manual pada overlay video
       overlay.addEventListener("click", function () {
         window.open(smartlinkUrl, '_blank');
         unlockContent();
