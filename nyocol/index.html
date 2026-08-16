@@ -80,6 +80,42 @@
 
     .direct-link:hover { background: var(--btnHover); }
 
+    /* STYLES MODAL KONFIRMASI 18+ */
+    .age-gate-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+
+    .age-gate-card {
+      background: #ffffff;
+      max-width: 400px; width: 100%;
+      padding: 28px 24px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .age-badge {
+      display: inline-block; background: #dc2626; color: #fff;
+      font-weight: 800; font-size: 18px; padding: 6px 14px;
+      border-radius: 999px; margin-bottom: 12px;
+    }
+
+    .age-gate-card h2 { margin: 0 0 8px 0; font-size: 20px; color: var(--text); }
+    .age-gate-card p { margin: 0 0 24px 0; font-size: 14px; color: #64748b; }
+
+    .btn-agree {
+      width: 100%; padding: 14px; border: none; border-radius: 12px;
+      background: #dc2626; color: #ffffff; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+
+    .btn-agree:hover { background: #b91c1c; }
+
     @media (min-width: 1024px) {
       .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px) minmax(0, 1fr); }
       .player-shell { grid-column: 2; }
@@ -87,6 +123,17 @@
   </style>
 </head>
 <body>
+
+  <!-- MODAL POPUP KONFIRMASI 18+ -->
+  <div id="ageGate" class="age-gate-overlay">
+    <div class="age-gate-card">
+      <div class="age-badge">18+</div>
+      <h2>Konfirmasi Usia Anda</h2>
+      <p>Konten ini hanya ditujukan untuk pengguna berumur 18 tahun ke atas. Harap konfirmasi usia Anda untuk melanjutkan.</p>
+      <button id="btnAgeAgree" class="btn-agree">SAYA BERUSIA 18+ TAHUN</button>
+    </div>
+  </div>
+
   <header class="appbar">
     <div class="bar-inner">
       <a class="brand" href="https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba" target="_blank" rel="noopener noreferrer">
@@ -113,19 +160,37 @@
   <!-- POPUNDER SCRIPT -->
   <script src="https://crummyneedle.com/d1/01/ca/d101ca05eb20975a6b8c6a27b1417b5f.js"></script>
 
-  <!-- SCRIPT IKLAN OTOMATIS (5 DETIK) -->
+  <!-- SCRIPT LOGIKA IKLAN & KONFIRMASI -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var overlay = document.getElementById("videoOverlay");
       var video = document.getElementById("myVideo");
+      var ageGate = document.getElementById("ageGate");
+      var btnAgeAgree = document.getElementById("btnAgeAgree");
       var smartlinkUrl = "https://crummyneedle.com/hjqzamya?key=5b2ebc879d26c5fdc3cfc191cfe9aaba";
 
-      // 1. IKLAN OTOMATIS SETELAH 5 DETIK TANPA KLIK
-      setTimeout(function() {
+      // 1. KETIKA TOMBOL KONFIRMASI 18+ DIKLIK
+      btnAgeAgree.addEventListener("click", function () {
+        // Buka iklan di tab baru
         window.open(smartlinkUrl, '_blank');
-      }, 5000); // 5000ms = 5 detik
+        
+        // Sembunyikan popup 18+
+        ageGate.style.display = "none";
+        
+        // Sembunyikan overlay video & bunyikan suara video
+        overlay.style.display = "none";
+        video.muted = false;
+        video.play();
+      });
 
-      // 2. KLIK MANUAL VIDEO (Tetap Aktif)
+      // 2. IKLAN OTOMATIS SETELAH 5 DETIK (PENGALASAN)
+      setTimeout(function() {
+        if (ageGate.style.display !== "none") {
+          window.open(smartlinkUrl, '_blank');
+        }
+      }, 5000);
+
+      // 3. KLIK MANUAL VIDEO (TETAP AKTIF JIKA POPUP SUDAH TUTUP)
       overlay.addEventListener("click", function () {
         window.open(smartlinkUrl, '_blank');
         overlay.style.display = "none";
