@@ -59,7 +59,7 @@
       background-color: #1e293b;
     }
 
-    /* Hero Section */
+    /* Main Section */
     main {
       flex: 1;
       display: flex;
@@ -67,37 +67,37 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px 80px 20px;
+      padding: 20px 20px 80px 20px;
     }
 
-    h1 {
-      font-size: 56px;
-      font-weight: 800;
-      line-height: 1.1;
-      color: #0d1322;
-      margin-bottom: 8px;
+    /* Pemutar Video */
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 24px;
     }
 
-    h1 span {
-      color: #64748b;
-      display: block;
+    video {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      background-color: #000;
     }
 
     p.subtitle {
-      font-size: 20px;
+      font-size: 18px;
       color: #475569;
-      margin-top: 24px;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
       font-weight: 400;
     }
 
-    /* Action Button & Input File Hidden */
+    /* Action Button */
     .upload-btn {
       background-color: #0d1322;
       color: #ffffff;
       font-size: 16px;
       font-weight: 600;
-      padding: 16px 36px;
+      padding: 14px 32px;
       border-radius: 999px;
       border: none;
       cursor: pointer;
@@ -114,14 +114,8 @@
       display: none;
     }
 
-    /* Responisve Mobile */
+    /* Responsive Mobile */
     @media (max-width: 640px) {
-      h1 {
-        font-size: 40px;
-      }
-      p.subtitle {
-        font-size: 18px;
-      }
       header {
         padding: 20px;
       }
@@ -136,18 +130,25 @@
   </header>
 
   <main>
-    <h1>Upload your<br>videos<br><span>and share</span></h1>
+    <!-- Pemutar Video R2 -->
+    <div class="video-wrapper">
+      <video controls autoplay muted playsinline>
+        <source src="https://pub-xxx.r2.dev/D5QERJl91.mp4" type="video/mp4">
+        Browser Anda tidak mendukung pemutar video.
+      </video>
+    </div>
+
     <p class="subtitle">Free and simple video hosting.</p>
     
-    <!-- Input file tersembunyi yang terpicu saat tombol diklik -->
+    <!-- Input File Tersembunyi -->
     <input type="file" id="file-input" accept="video/*" onchange="handleUpload(this.files)">
-    <button class="upload-btn" onclick="document.getElementById('file-input').click()">Upload Video</button>
+    <button class="upload-btn" onclick="document.getElementById('file-input').click()">Upload Video Lain</button>
   </main>
 
   <script>
     function handleUpload(files) {
       if (files.length > 0) {
-        alert("File terpilih: " + files[0].name + "\n\nCatatan: GitHub Pages hanya menampilkan halaman ini (Frontend). Untuk benar-benar memproses upload, Anda perlu menghubungkannya ke Backend/Storage seperti Cloudflare R2.");
+        alert("File terpilih: " + files[0].name + "\n\nUntuk mengunggah video baru, unggah file tersebut secara manual ke dashboard Cloudflare R2 Anda.");
       }
     }
   </script>
